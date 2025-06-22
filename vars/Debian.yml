@@ -1,0 +1,27 @@
+# SPDX-FileCopyrightText: Tim Orling
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+sdmuxctrl_runtime_dependencies:
+  - "libftdi1-2"
+  - "libpopt0"
+
+sdmuxctrl_build_dependencies:
+  - "apt-transport-https"
+  - "git"
+  - "cmake"
+  - "debhelper"
+  - "libftdi1-dev"
+  - "libpopt-dev"
+  - "pkg-config"
+
+sdmuxctrl_repo_url: "https://github.com/moto-timo/sd-mux.git"
+sdmuxctrl_version: '0.0.3'
+sdmuxctrl_package_name: "{{ 'sd-mux-ctrl' + '_' + sdmuxctrl_version + '_' + deb_arch.stdout + '.deb' }}"
+
+sdmuxctrl_extra_packages:
+  - "minicom"
+  - "tio"
+  - "vim"
+  - "nano"

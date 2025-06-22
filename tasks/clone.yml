@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: Tim Orling
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Clone sd-mux-ctrl"
+  ansible.builtin.git:
+    repo: "{{ sdmuxctrl_repo_url }}"
+    dest: /tmp/checkout
+    version: master
+  when: "not sdmuxctrl_is_cloned"
+  register: sdmuxctrl_git_updated
+  notify: "sd-mux-ctrl has been cloned"

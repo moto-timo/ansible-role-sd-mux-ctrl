@@ -1,0 +1,15 @@
+# SPDX-FileCopyrightText: Tim Orling
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Build Debian sd-mux-ctrl Package"
+  ansible.builtin.command:
+    #cmd: "dpkg-buildpackage -us -uc"
+    cmd: "gbp buildpackage"
+    chdir: /tmp/checkout
+  when:
+    - "not sdmuxctrl_is_built"
+    - "sdmuxctrl_git_updated"
+  notify: "sd-mux-ctrl has been built"

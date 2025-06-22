@@ -1,0 +1,10 @@
+#SPDX-License-Identifier: Apache-2.0
+---
+# defaults file for ansible-role-sd-mux-ctrl
+sdmuxctrl_build_deps_are_installed: false
+sdmuxctrl_is_cloned: false
+sdmuxctrl_is_built: false
+sdmuxctrl_is_upgraded: false
+sdmuxctrl_group_is_installed: false
+sdmuxctrl_extra_packages_are_installed: false
+sdmuxctrl_runtime_deps_are_installed: false

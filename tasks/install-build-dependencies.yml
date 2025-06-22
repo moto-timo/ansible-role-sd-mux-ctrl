@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: Tim Orling
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Install sd-mux-ctrl build dependencies"
+  become: true
+  ansible.builtin.apt:
+    name: "{{ sdmuxctrl_build_dependencies }}"
+    state: present
+    update_cache: true
+  when: "not sdmuxctrl_build_deps_are_installed"
+  notify: "sd-mux-ctrl build dependencies have been installed"

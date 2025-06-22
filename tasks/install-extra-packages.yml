@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: Tim Orling
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Install sd-mux-ctrl Extra Packages"
+  become: true
+  ansible.builtin.apt:
+    name: "{{ sdmuxctrl_extra_packages }}"
+    state: present
+    update_cache: true
+  when: "not sdmuxctrl_extra_packages_are_installed"
+  notify: "sd-mux-ctrl extra packages have been installed"

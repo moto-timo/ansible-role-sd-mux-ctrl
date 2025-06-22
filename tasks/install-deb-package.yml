@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: Tim Orling
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Install or Upgrade sd-mux-ctrl Debian Package"
+  become: true
+  ansible.builtin.apt:
+    deb: "{{ '/tmp/' + sdmuxctrl_package_name }}"
+    state: present
+    update_cache: true
+  when: "not sdmuxctrl_is_upgraded"
+  notify: "sd-mux-ctrl has been installed or upgraded"

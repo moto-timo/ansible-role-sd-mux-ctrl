@@ -1,0 +1,38 @@
+#SPDX-License-Identifier: Apache-2.0
+---
+# tasks file for ansible-role-sd-mux-ctrl
+
+- ansible.builtin.import_tasks: "include-vars.yml"
+
+- name: "Install sd-mux-ctrl Build Dependencies"
+  ansible.builtin.import_tasks: "install-build-dependencies.yml"
+  become: true
+  when: "not sdmuxctrl_build_deps_are_installed"
+
+- name: "Clone sd-mux-ctrl"
+  ansible.builtin.import_tasks: "clone.yml"
+  become: true
+  when: "not sdmuxctrl_is_cloned"
+
+- name: "Build sd-mux-ctrl Package"
+  ansible.builtin.import_tasks: "build-deb-package.yml"
+  when: "not sdmuxctrl_is_built"
+
+- name: "Install sd-mux-ctrl Package"
+  ansible.builtin.import_tasks: "install-deb-package.yml"
+  become: true
+  when: "not sdmuxctrl_is_upgraded"
+
+- name: "Create sd-mux-ctrl Group"
+  ansible.builtin.import_tasks: "add-sdmuxctrl-group.yml"
+  become: true
+
+- name: "Install sd-mux-ctrl Extra Packages"
+  ansible.builtin.import_tasks: "install-extra-packages.yml"
+  when:
+  - "not sdmuxctrl_extra_packages_are_installed"
+
+- name: "Install sd-mux-ctrl Runtime Dependencies"
+  ansible.builtin.import_tasks: "install-runtime-dependencies.yml"
+  when:
+  - "not sdmuxctrl_runtime_deps_are_installed"

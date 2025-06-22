@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: Tim Orling
+#
+# SPDX-License-Identifier: Apache-2.0
+
+---
+
+- name: "Ensure /etc/sysusers.d exists"
+  become: true
+  ansible.builtin.file:
+    path: /etc/sysusers.d
+    state: directory
+
+- name: "Create sdmuxctrl group"
+  become: true
+  ansible.builtin.copy:
+    dest: /etc/sysusers.d/sdmuxctrl.conf
+    content: |
+      # Type	Name		ID	GECOS		Home directory Shell
+      u		sdmuxctrl	-	"Pdudaemon"
+  when: "not sdmuxctrl_group_is_installed"
+  notify: "Pdudaemon group has been installed"
